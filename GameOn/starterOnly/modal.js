@@ -38,14 +38,13 @@ const validate = (e)=>{
   console.log(e.target.location1.value)
   console.log(e.target.location2.value)
 }
-
+// Submit form
 formElt.onsubmit = (e)=> validate(e);
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // Close modal event
-//closeModalBtn.forEach(e => e.addEventListener("click", closeModal));//
 closeModalBtn.addEventListener("click", function(event) {
   event.preventDefault ();
   closeModal();
@@ -61,4 +60,11 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-
+//Validate email
+emailElt.addEventListener("keyup",function (event) {
+  if(emailElt.validity.typeMismatch) {
+    email.setCustomValidity("L'email est invalide");
+  }else {
+    email.setCustomValidity("");
+  }
+})
