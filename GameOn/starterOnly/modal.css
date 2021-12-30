@@ -478,6 +478,14 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
+
+error{
+  font-size: 1rem;
+    font-family: sans-serif;
+    background-color: black;
+    color: red;
+}
+
 @media screen and (max-width: 800px) {
   .hero-section {
     display: block;
