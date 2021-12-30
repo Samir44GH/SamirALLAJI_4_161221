@@ -20,27 +20,10 @@ const lastElt = document.getElementById("last");
 const emailElt = document.getElementById("email");
 const birthdateElt = document.getElementById("birthdate");
 const quantityElt = document.getElementById("quantity");
-const locationElt = document.getElementById("location");
+const locationsElt = document.getElementsByName("location");
 const checkbox1Elt = document.querySelector("#checkbox1");
 const checkbox2Elt = document.querySelector("#checkbox2");
 
-/*firstElt.addEventListener("focusout", (e)=> {
-  console.log(e.target.value.length);
-  if(e.target.value.length<2) {
-    let newError = document.createElement("error")
-newError.textContent="Veuillez entrer 2 caractères ou plus pour le champ du prénom"
-document.querySelectorAll(".formData")[0].appendChild(newError)
-  }
-});
-
-lastElt.addEventListener("focusout", (e)=> {
-  console.log(e.target.value.length);
-  if(e.target.value.length<2) {
-    let newError = document.createElement("error")
-newError.textContent="Veuillez entrer 2 caractères ou plus pour le champ du nom."
-document.querySelectorAll(".formData")[1].appendChild(newError)
-  }
-});*/
 //Validation elements
 const validate = (e) => {
   e.preventDefault();
@@ -61,9 +44,8 @@ firstElt.addEventListener("focusout", (e) => {
   if (e.target.value.length < 2) {
     let newError = document.createElement("error");
     newError.textContent =
-      "Veuillez entrer 2 caractères ou plus pour le champ du prénom";
+      "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
     document.querySelectorAll(".formData")[0].appendChild(newError);
-    return false;
   }
 });
 
@@ -74,7 +56,6 @@ lastElt.addEventListener("focusout", (e) => {
     newError.textContent =
       "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
     document.querySelectorAll(".formData")[1].appendChild(newError);
-    return false;
   }
 });
 
@@ -84,33 +65,64 @@ emailElt.addEventListener("focusout", (e) => {
     let newError = document.createElement("error");
     newError.textContent = "Veuillez entrer une adresse email valide.";
     document.querySelectorAll(".formData")[2].appendChild(newError);
-    return false;
   }
 });
 
 birthdateElt.addEventListener("focusout", (e) => {
   console.log(e.target.value);
-  let minBirthdate = new Date("2003/12/01");
   if (
-    !e.target.value.date(
-      /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/
+    !e.target.value.match(
+      /^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/
     )
   ) {
     let newError = document.createElement("error");
-    newError.textContent = "Vous n'avez pas le minimum d'âge requis.";
+    newError.textContent = "Veuillez indiquer votre date de naissance";
     document.querySelectorAll(".formData")[3].appendChild(newError);
-    return false;
   }
 });
 
 quantityElt.addEventListener("focusout", (e) => {
-  console.log(e.target.value.length);
+  console.log(e.target.value.match);
   if (!e.target.value.match(/^([0-9]){1,2}$/)) {
     let newError = document.createElement("error");
     newError.textContent = "Veuillez saisir une valeur numérique.";
     document.querySelectorAll(".formData")[4].appendChild(newError);
   }
 });
+
+/*locationElt.addEventListener("focusout", (e) => {
+  console.log(e.target.value.match);
+  if (
+    !e.target.value.match ===
+    [
+      location[0].checked == true ||
+        location[1].checked == true ||
+        location[2].checked == true ||
+        location[3].checked == true ||
+        location[4].checked == true ||
+        location[5].checked == true,
+    ]
+  ) {
+    let newError = document.createElement("error");
+    newError.textContent = "Veuillez saisir une ville.";
+    document.querySelectorAll(".formData")[5].appendChild(newError);
+  }
+});*/
+
+/*locationsElt.addEventListener("focusout", (i) => {
+  console.log(e.target.value.length);
+  let array = [];
+  for (let i = 0; i < locationsElt.length; i++) {
+    if (locationsElt[i].checked === true) {
+      array.push(locationsElt[i].checked);
+    }
+  }
+  if (array.indexOf(true) !== 0) {
+    let newError = document.createElement("error");
+    newError.textContent = "Veuillez saisir une ville.";
+    document.querySelectorAll(".formdata")[5].appendChild(newError);
+  }
+});*/
 
 // Submit form
 formElt.onsubmit = (e) => validate(e);
@@ -134,29 +146,7 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-/*//Validate email message
-emailElt.addEventListener("input",function (event) {
-  if(emailElt.validity.typeMismatch) {
-    email.setCustomValidity("L'email n'est pas valide");
-  }else {
-    email.setCustomValidity("");
-  }
-});*/
-/*
-formElt.addEventListener("submit", function(e) {
-  if(!first.value) {
-    erreur = ("Veuillez renseigner 2 caractères ou plus pour le champ du prénom" );
-  }
-  if (erreur) {
-    e.preventDefault();
-    document.getElementsByClassName("erreur").innerHTML = erreur;
-   return false;  }
-   else {
-     alert('Formulaire envoyé');
-   }
-})
-
- 
+/* 
 let d = new Date("2012/2/30");
           
         up.innerHTML = "Click on the button to check"
@@ -170,5 +160,4 @@ let d = new Date("2012/2/30");
             return this.getTime() === this.getTime();
         };
 let checkRadio = document.querySelector(
-                'input[name="GFG"]:checked');
-*/
+                'input[name="GFG"]:checked');*/
