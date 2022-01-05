@@ -24,9 +24,6 @@ const locationsElt = document.getElementsByName("location");
 const checkbox1Elt = document.querySelector("#checkbox1");
 const checkbox2Elt = document.querySelector("#checkbox2");
 
-//Création d'un élément newError
-let newError = document.createElement("error");
-
 //Validation elements
 const validate = (e) => {
   e.preventDefault();
@@ -40,61 +37,11 @@ const validate = (e) => {
   console.log(e.target.checkbox1.checked);
   console.log(e.target.checkbox2.value);
 };
-/*
-//Validation du firstElt
-function validateFirsElt() {
-  if (firstElt.value.length < 2) {
-    //Si la valeur retournée est < de 2 caractères => l'utilisatuer sera informé par le message d'erreur
-    newError.textContent =
-      "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
-    document.querySelectorAll(".formData")[0].appendChild(newError);
-    //Permet de connaître la validation de l'entrée sur la console
-    console.log(
-      "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
-    );
-    return false;
-  } else {
-    newError.textContent = "";
-  }
-  return true;
-}
-//Validation du lastElt
-function validateLastElt() {
-  if (lastElt.value.length < 2) {
-    //Si la valeur retournée est < de 2 caractères => l'utilisatuer sera informé par le message d'erreur
-    newError.textContent =
-      "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
-    document.querySelectorAll(".formData")[1].appendChild(newError);
-    //Permet de connaître la validation de l'entrée sur la console
-    console.log(
-      "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
-    );
-    return false;
-  } else {
-    newError.textContent = "";
-    return true;
-  }
-}
-//Validation du emailElt
-function validateEmailElt() {
-  //Si la valeur retournée ne correspond pas à la regex => l'utilisateur sera informé par le message d'erreur
-  if (
-    !e.target.email.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
-  ) {
-    newError.textContent = "Veuillez entrer une adresse email valide.";
-    document.querySelectorAll(".formData")[2].appendChild(newError);
-    //Permet de connaître la validation de l'entrée sur la console
-    console.log("Veuillez entrer une adresse email valide.");
-    return false;
-  } else {
-    newError.textContent = "";
-    return true;
-  }
-}*/
 
-//Message error validation
 //Création d'un élément newError
+let newError = document.createElement("error");
 
+//Message d'erreur(first)
 firstElt.addEventListener("focusout", (e) => {
   //Si la valeur retournée est < de 2 caractères => l'utilisatuer sera informé par le message d'erreur
   if (e.target.value.length < 2) {
@@ -107,7 +54,7 @@ firstElt.addEventListener("focusout", (e) => {
     );
   }
 });
-
+//Message d'erreur(last)
 lastElt.addEventListener("focusout", (e) => {
   console.log(e.target.value.length);
   //Si la valeur retournée est < de 2 caractères => l'utilisateur sera informé par le message d'erreur
@@ -119,7 +66,7 @@ lastElt.addEventListener("focusout", (e) => {
     console.log("Veuillez entrer 2 caractères ou plus pour le champ du nom.");
   }
 });
-
+//Message d'erreur(email)
 emailElt.addEventListener("focusout", (e) => {
   console.log(e.target.value);
   //Si la valeur retournée ne correspond pas à la regex => l'utilisateur sera informé par le message d'erreur
@@ -130,7 +77,7 @@ emailElt.addEventListener("focusout", (e) => {
     console.log("Veuillez entrer une adresse email valide.");
   }
 });
-
+//Message d'erreur(birthdate)
 birthdateElt.addEventListener("focusout", (e) => {
   console.log(e.target.value);
   //Si la valeur retournée ne correspond pas à la regex => l'utilisateur sera informé par le message d'erreur
@@ -145,7 +92,7 @@ birthdateElt.addEventListener("focusout", (e) => {
     console.log("Veuillez entrer votre date de naissance");
   }
 });
-
+//Message d'erreur(quantity)
 quantityElt.addEventListener("focusout", (e) => {
   console.log(e.target.value.match);
   //Si la valeur retournée ne correspond pas à la regex => l'utilisateur sera informé par le message d'erreur
@@ -156,43 +103,30 @@ quantityElt.addEventListener("focusout", (e) => {
     console.log("Veuillez saisir une valeur numérique.");
   }
 });
-
+//Message d'erreur(location)
 let checkRadio = document.querySelector('input[name="location"]:checked');
+//Si la valeur retournée ne correspond pas à une radio saisie => l'utilisateur sera informé par le message d'erreur
 if (checkRadio !== 0) {
+  //Permet de connaître la validation de l'entrée sur la console
   console.log("Veuillez saisir une ville.");
   newError.textContent = "Veuillez saisir une ville.";
   document.querySelectorAll(".formData")[5].appendChild(newError);
 }
-
+//Message d'erreur(checkbox1)
 let checkCondition = document.querySelector('input[id="checkbox1"]:checked');
+//Si la valeur retournée ne correspond pas à une case validée obligatoirement => l'utilisateur sera informé par le message d'erreur
 if (checkCondition !== 0) {
-  console.log("Veuillez accepter les conditions");
+  //Permet de connaître la validation de l'entrée sur la console
+  console.log("Veuillez accepter les conditions d'utilistaion");
   newError.textContent = "Veuillez accepter les conditions d'utilisation.";
   document.querySelectorAll(".formData")[6].appendChild(newError);
 }
-/*locationsElt.addEventListener("click", (e) => {
-  console.log(e.target.value.match);
-
-  if (!e.target.value.match === 0) {
-    let newError = document.createElement("error");
-    newError.textContent = "Veuillez saisir une ville.";
-    document.querySelectorAll(".formData")[5].appendChild(newError);
+//Validation du formulaire(Message)
+formElt.addEventListener("submit", function () {
+  if (formElt !== 0) {
+    alert("Merci, votre réservation a été reçue!");
   }
-});*/
-
-/*locationsElt.addEventListener("checked", (i) => {
-  let array = [];
-  for (let i = 0; i < locationsElt.length; i++) {
-    if (locationsElt[i].checked === true) {
-      array.push(locationsElt[i].checked);
-    }
-  }
-  if (array.indexOf(true) !== 0) {
-    let newError = document.createElement("error");
-    newError.textContent = "Veuillez saisir une ville.";
-    document.querySelectorAll(".formdata")[5].appendChild(newError);
-  }
-});*/
+});
 
 // Submit form
 formElt.onsubmit = (e) => validate(e);
