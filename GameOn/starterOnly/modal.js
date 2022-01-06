@@ -24,6 +24,28 @@ const locationsElt = document.getElementsByName("location");
 const checkbox1Elt = document.querySelector("#checkbox1");
 const checkbox2Elt = document.querySelector("#checkbox2");
 
+// Submit form
+formElt.onsubmit = (e) => validate(e);
+
+// launch modal event
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+// Close modal event
+closeModalBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  closeModal();
+});
+
+// launch modal form
+function launchModal() {
+  modalbg.style.display = "block";
+}
+
+// Close modal form
+function closeModal() {
+  modalbg.style.display = "none";
+}
+
 //Validation elements
 const validate = (e) => {
   e.preventDefault();
@@ -94,7 +116,7 @@ birthdateElt.addEventListener("focusout", (e) => {
 });
 //Message d'erreur(quantity)
 quantityElt.addEventListener("focusout", (e) => {
-  console.log(e.target.value.match);
+  console.log(e.target.value);
   //Si la valeur retournée ne correspond pas à la regex => l'utilisateur sera informé par le message d'erreur
   if (!e.target.value.match(/^([0-9]){1,2}$/)) {
     newError.textContent = "Veuillez saisir une valeur numérique.";
@@ -106,7 +128,7 @@ quantityElt.addEventListener("focusout", (e) => {
 //Message d'erreur(location)
 let checkRadio = document.querySelector('input[name="location"]:checked');
 //Si la valeur retournée ne correspond pas à une radio saisie => l'utilisateur sera informé par le message d'erreur
-if (checkRadio !== 0) {
+if (checkRadio !== "") {
   //Permet de connaître la validation de l'entrée sur la console
   console.log("Veuillez saisir une ville.");
   newError.textContent = "Veuillez saisir une ville.";
@@ -114,54 +136,17 @@ if (checkRadio !== 0) {
 }
 //Message d'erreur(checkbox1)
 let checkCondition = document.querySelector('input[id="checkbox1"]:checked');
-//Si la valeur retournée ne correspond pas à une case validée obligatoirement => l'utilisateur sera informé par le message d'erreur
-if (checkCondition !== 0) {
+//Si la valeur retournée ne correspond pas à une case validée => l'utilisateur sera informé par le message d'erreur
+if (checkCondition !== false) {
   //Permet de connaître la validation de l'entrée sur la console
   console.log("Veuillez accepter les conditions d'utilistaion");
-  newError.textContent = "Veuillez accepter les conditions d'utilisation.";
+  newError.textContent = "Veuillez accepter les conditions d'utilistaion";
   document.querySelectorAll(".formData")[6].appendChild(newError);
 }
-//Validation du formulaire(Message)
-formElt.addEventListener("submit", function () {
-  if (formElt !== 0) {
-    alert("Merci, votre réservation a été reçue!");
-  }
+//Message de validation du formulaire
+const validation = document.querySelector(".btn-submit");
+const validationSuccess = document.querySelector(".content-success");
+validation.addEventListener("click", (e) => {
+  if (e.target.value !== 0)
+    validationSuccess.textContent = "Merci, votre réservation a été reçue!";
 });
-
-// Submit form
-formElt.onsubmit = (e) => validate(e);
-
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// Close modal event
-closeModalBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  closeModal();
-});
-
-// launch modal form
-function launchModal() {
-  modalbg.style.display = "block";
-}
-
-// Close modal form
-function closeModal() {
-  modalbg.style.display = "none";
-}
-
-/* 
-let d = new Date("2012/2/30");
-          
-        up.innerHTML = "Click on the button to check"
-                    + " validity of data.<br>";
-          
-        Date.prototype.isValid = function () {
-              
-            // If the date object is invalid it
-            // will return 'NaN' on getTime() 
-            // and NaN is never equal to itself.
-            return this.getTime() === this.getTime();
-        };
-let checkRadio = document.querySelector(
-                'input[name="GFG"]:checked');*/
