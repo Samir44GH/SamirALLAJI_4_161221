@@ -7,6 +7,13 @@ function editNav() {
   }
 }
 
+Date.prototype.isValid = function () {
+  // If the date object is invalid it
+  // will return 'NaN' on getTime()
+  // and NaN is never equal to itself.
+  return this.getTime() === this.getTime();
+};
+
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
@@ -58,6 +65,24 @@ const validate = (e) => {
   console.log(e.target.location.value);
   console.log(e.target.checkbox1.checked);
   console.log(e.target.checkbox2.value);
+
+  if (!checkbox1Elt.checked) {
+    //Permet de connaître la validation de l'entrée sur la console
+    console.log("Veuillez accepter les conditions d'utilistaion");
+    newError.textContent = "Veuillez accepter les conditions d'utilistaion";
+    document.querySelectorAll(".formData")[6].appendChild(newError);
+  }
+  let checkRadio = document.querySelector('input[name="location"]:checked');
+  //Si la valeur retournée ne correspond pas à une radio saisie => l'utilisateur sera informé par le message d'erreur
+  if (!checkRadio) {
+    //Permet de connaître la validation de l'entrée sur la console
+    console.log("Veuillez saisir une ville.");
+    newError.textContent = "Veuillez saisir une ville.";
+    document.querySelectorAll(".formData")[5].appendChild(newError);
+  } else {
+    document.querySelector(".modal-body").textContent =
+      "Merci, votre réservation a été reçue!";
+  }
 };
 
 //Création d'un élément newError
@@ -99,15 +124,13 @@ emailElt.addEventListener("focusout", (e) => {
     console.log("Veuillez entrer une adresse email valide.");
   }
 });
+
 //Message d'erreur(birthdate)
 birthdateElt.addEventListener("focusout", (e) => {
   console.log(e.target.value);
+  let d = new Date(e.target.value);
   //Si la valeur retournée ne correspond pas à la regex => l'utilisateur sera informé par le message d'erreur
-  if (
-    !e.target.value.match(
-      /^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/
-    )
-  ) {
+  if (!d.isValid()) {
     newError.textContent = "Veuillez entrer votre date de naissance";
     document.querySelectorAll(".formData")[3].appendChild(newError);
     //Permet de connaître la validation de l'entrée sur la console
@@ -124,29 +147,4 @@ quantityElt.addEventListener("focusout", (e) => {
     //Permet de connaître la validation de l'entrée sur la console
     console.log("Veuillez saisir une valeur numérique.");
   }
-});
-//Message d'erreur(location)
-let checkRadio = document.querySelector('input[name="location"]:checked');
-//Si la valeur retournée ne correspond pas à une radio saisie => l'utilisateur sera informé par le message d'erreur
-if (checkRadio !== "") {
-  //Permet de connaître la validation de l'entrée sur la console
-  console.log("Veuillez saisir une ville.");
-  newError.textContent = "Veuillez saisir une ville.";
-  document.querySelectorAll(".formData")[5].appendChild(newError);
-}
-//Message d'erreur(checkbox1)
-let checkCondition = document.querySelector('input[id="checkbox1"]:checked');
-//Si la valeur retournée ne correspond pas à une case validée => l'utilisateur sera informé par le message d'erreur
-if (checkCondition !== false) {
-  //Permet de connaître la validation de l'entrée sur la console
-  console.log("Veuillez accepter les conditions d'utilistaion");
-  newError.textContent = "Veuillez accepter les conditions d'utilistaion";
-  document.querySelectorAll(".formData")[6].appendChild(newError);
-}
-//Message de validation du formulaire
-const validation = document.querySelector(".btn-submit");
-const validationSuccess = document.querySelector(".content-success");
-validation.addEventListener("click", (e) => {
-  if (e.target.value !== 0)
-    validationSuccess.textContent = "Merci, votre réservation a été reçue!";
 });
