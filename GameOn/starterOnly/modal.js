@@ -71,6 +71,9 @@ const validate = (e) => {
     console.log("Veuillez accepter les conditions d'utilistaion");
     newError.textContent = "Veuillez accepter les conditions d'utilistaion";
     document.querySelectorAll(".formData")[6].appendChild(newError);
+  } else {
+    document.querySelector(".modal-body").textContent =
+      "Merci, votre réservation a été reçue!";
   }
   let checkRadio = document.querySelector('input[name="location"]:checked');
   //Si la valeur retournée ne correspond pas à une radio saisie => l'utilisateur sera informé par le message d'erreur
@@ -79,9 +82,6 @@ const validate = (e) => {
     console.log("Veuillez saisir une ville.");
     newError.textContent = "Veuillez saisir une ville.";
     document.querySelectorAll(".formData")[5].appendChild(newError);
-  } else {
-    document.querySelector(".modal-body").textContent =
-      "Merci, votre réservation a été reçue!";
   }
 };
 
