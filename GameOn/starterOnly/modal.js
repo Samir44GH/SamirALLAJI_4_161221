@@ -57,7 +57,6 @@ function closeModal() {
 const validate = (e) => {
   e.preventDefault();
   console.log(e.target.first.value);
-  console.log(e.target.first.isvalid);
   console.log(e.target.last.value);
   console.log(e.target.email.value);
   console.log(e.target.birthdate.value);
@@ -66,15 +65,6 @@ const validate = (e) => {
   console.log(e.target.checkbox1.checked);
   console.log(e.target.checkbox2.value);
 
-  if (!checkbox1Elt.checked) {
-    //Permet de connaître la validation de l'entrée sur la console
-    console.log("Veuillez accepter les conditions d'utilistaion");
-    newError.textContent = "Veuillez accepter les conditions d'utilistaion";
-    document.querySelectorAll(".formData")[6].appendChild(newError);
-  } else {
-    document.querySelector(".modal-body").textContent =
-      "Merci, votre réservation a été reçue!";
-  }
   let checkRadio = document.querySelector('input[name="location"]:checked');
   //Si la valeur retournée ne correspond pas à une radio saisie => l'utilisateur sera informé par le message d'erreur
   if (!checkRadio) {
@@ -82,6 +72,16 @@ const validate = (e) => {
     console.log("Veuillez saisir une ville.");
     newError.textContent = "Veuillez saisir une ville.";
     document.querySelectorAll(".formData")[5].appendChild(newError);
+  } else {
+    document.querySelector(".modal-body").textContent =
+      "Merci, votre réservation a été reçue!";
+  }
+
+  if (!checkbox1Elt.checked) {
+    //Permet de connaître la validation de l'entrée sur la console
+    console.log("Veuillez accepter les conditions d'utilistaion");
+    newError.textContent = "Veuillez accepter les conditions d'utilistaion";
+    document.querySelectorAll(".formData")[6].appendChild(newError);
   }
 };
 

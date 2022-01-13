@@ -40,7 +40,7 @@
             réservations... Places limitées !
           </p>
           <button type="button" class="btn-signup modal-btn">
-            je m'inscris
+            Je m'inscris
           </button>
         </div>
         <div class="hero-img">
@@ -87,6 +87,7 @@
                   name="email"
                   placeholder="JeanDupont@gmail.com"
                   pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z.]{2,15}"
+                  required
                 /><br />
               </div>
               <div class="formData">
@@ -111,6 +112,7 @@
                   name="quantity"
                   min="0"
                   max="99"
+                  required
                 />
               </div>
               <p class="text-label">
@@ -186,7 +188,7 @@
 
               <div class="formData">
                 <input class="checkbox-input" type="checkbox" id="checkbox1" />
-                <label class="checkbox2-label" for="checkbox1">
+                <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
