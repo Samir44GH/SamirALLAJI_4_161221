@@ -71,7 +71,7 @@ const validate = (e) => {
   if (!checkbox1Elt.checked) {
     //Permet de connaître la validation de l'entrée sur la console
     console.log("Veuillez accepter les conditions d'utilistaion");
-    newError.textContent = "Veuillez accepter les conditions d'utilistaion";
+    newError.textContent = "Veuillez accepter les conditions d'utilisation";
     document.querySelectorAll(".formData")[6].appendChild(newError);
   } else if (!checkRadio) {
     //Permet de connaître la validation de l'entrée sur la console
