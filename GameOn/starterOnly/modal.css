@@ -181,11 +181,18 @@ main {
   position: relative;
   color: #fff;
   padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
+}
+
+.content {
+  height: 800px;
 }
 
 label {
